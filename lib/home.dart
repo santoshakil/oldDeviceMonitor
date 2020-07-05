@@ -76,7 +76,7 @@ class _HomeState extends State<Home> {
           networkType: NetworkType.connected,
         ));
     super.initState();
-    //manager();
+    manager();
   }
 
   void manager() async {
