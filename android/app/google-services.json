@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "135142555740",
+    "firebase_url": "https://devicemonitor-ms.firebaseio.com",
+    "project_id": "devicemonitor-ms",
+    "storage_bucket": "devicemonitor-ms.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135142555740:android:461b341f13cccdf988a699",
+        "android_client_info": {
+          "package_name": "com.mattesoft.device_monitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135142555740-mh8n0hl3shetdda0vqi3brtgh75unqq0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mattesoft.device_monitor",
+            "certificate_hash": "a4d538fece84f723edaace2d6ed281dd38bd78dd"
+          }
+        },
+        {
+          "client_id": "135142555740-rheis7f3d6dobp3sd0r2jsemki0plpd2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0ruBBM4cwqR9VuYPwMCFgwTpRG3K37oE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135142555740-rheis7f3d6dobp3sd0r2jsemki0plpd2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
