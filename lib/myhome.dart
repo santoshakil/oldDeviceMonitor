@@ -48,7 +48,7 @@ class _MyHomeState extends State<MyHome> {
 
   @override
   void initState() {
-    //manager();
+    manager();
     super.initState();
   }
 

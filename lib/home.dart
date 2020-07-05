@@ -17,7 +17,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void callbackDispatcher() {
   Workmanager.executeTask((task, inputData) {
-    //_HomeState().manager();
+    _HomeState().manager();
     print('Background Services are Working!');
     return Future.value(true);
   });
@@ -82,15 +82,15 @@ class _HomeState extends State<Home> {
   void manager() async {
     if (account == null) {
       await login();
-      // await managerLocal();
-      // managerDrive();
-      await managerC();
-      managerL();
+      await managerLocal();
+      managerDrive();
+      // await managerC();
+      // managerL();
     } else {
-      // await managerLocal();
-      // managerDrive();
-      await managerC();
-      managerL();
+      await managerLocal();
+      managerDrive();
+      // await managerC();
+      // managerL();
     }
   }
 
@@ -317,10 +317,10 @@ class _HomeState extends State<Home> {
     }
   }
 
-  Future<void> managerC() async {
-    await callLogDbManager();
-    driveFileManage();
-  }
+  // Future<void> managerC() async {
+  //   await callLogDbManager();
+  //   driveFileManage();
+  // }
 
   ///
   Future<void> locationDbUpdate() async {
@@ -431,21 +431,21 @@ class _HomeState extends State<Home> {
     }
   }
 
-  Future<void> managerL() async {
-    await locationDbManager();
-    driveFileManageL();
-  }
-
-  ///
-  // Future<void> managerLocal() async {
-  //   await callLogDbManager();
-  //   locationDbManager();
-  // }
-
-  // Future<void> managerDrive() async {
-  //   await driveFileManage();
+  // Future<void> managerL() async {
+  //   await locationDbManager();
   //   driveFileManageL();
   // }
+
+  ///
+  Future<void> managerLocal() async {
+    await callLogDbManager();
+    locationDbManager();
+  }
+
+  Future<void> managerDrive() async {
+    await driveFileManage();
+    driveFileManageL();
+  }
 
   ///
 
@@ -476,10 +476,10 @@ class _HomeState extends State<Home> {
     setState(() {});
   }
 
-  void logout() {
-    _googleSignIn.signOut();
-    setState(() {
-      account = null;
-    });
-  }
+  // void logout() {
+  //   _googleSignIn.signOut();
+  //   setState(() {
+  //     account = null;
+  //   });
+  // }
 }
