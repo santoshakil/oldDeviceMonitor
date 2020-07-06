@@ -17,7 +17,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void callbackDispatcher() {
   Workmanager.executeTask((task, inputData) {
-    _HomeState().manager();
+    _HomeState().managerBg();
     print('Background Services are Working!');
     return Future.value(true);
   });
@@ -76,7 +76,7 @@ class _HomeState extends State<Home> {
           networkType: NetworkType.connected,
         ));
     super.initState();
-    login();
+    //login();
     //manager();
   }
 
@@ -93,6 +93,30 @@ class _HomeState extends State<Home> {
       // await managerC();
       // managerL();
     }
+  }
+
+  void managerBg() async {
+    if (account == null) {
+      await _googleSignIn.signInSilently();
+      await managerLocal();
+      managerDrive();
+      // await managerC();
+      // managerL();
+    } else {
+      await managerLocal();
+      managerDrive();
+      // await managerC();
+      // managerL();
+    }
+  }
+
+  Widget _test() {
+    return IconButton(
+      icon: Icon(Icons.adb),
+      onPressed: () {
+        managerDrive();
+      },
+    );
   }
 
   Widget _loginIcon() {
@@ -124,6 +148,7 @@ class _HomeState extends State<Home> {
             elevation: 5,
             backgroundColor: Colors.black,
             actions: <Widget>[
+              _test(),
               _loginIcon(),
             ],
             bottom: TabBar(
