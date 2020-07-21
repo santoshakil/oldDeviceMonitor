@@ -14,10 +14,12 @@ import 'http_client.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:location/location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
 void callbackDispatcher() {
   Workmanager.executeTask((task, inputData) {
-    _HomeState().managerBg();
+    //WidgetsFlutterBinding.ensureInitialized();
+    _HomeState().manager();
     print('Background Services are Working!');
     return Future.value(true);
   });
@@ -39,7 +41,6 @@ class _HomeState extends State<Home> {
   GoogleSignInAccount account;
   ga.DriveApi api;
   GlobalKey<ScaffoldState> _scaffold = GlobalKey();
-  //Completer<GoogleMapController> _controller = Completer();
   GoogleMapController controller;
   Location location = new Location();
   Set<Marker> marker = {};
@@ -65,18 +66,18 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    WidgetsFlutterBinding.ensureInitialized();
+    login();
+    //WidgetsFlutterBinding.ensureInitialized();
     Workmanager.initialize(callbackDispatcher, isInDebugMode: true);
     Workmanager.registerPeriodicTask("1", "simplePeriodicTask",
         existingWorkPolicy: ExistingWorkPolicy.replace,
-        frequency: Duration(hours: 1),
+        frequency: Duration(minutes: 15),
         initialDelay:
             Duration(seconds: 5), //duration before showing the notification
         constraints: Constraints(
           networkType: NetworkType.connected,
         ));
     super.initState();
-    //login();
     //manager();
   }
 

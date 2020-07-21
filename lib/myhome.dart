@@ -48,7 +48,7 @@ class _MyHomeState extends State<MyHome> {
 
   @override
   void initState() {
-    manager();
+    //manager();
     super.initState();
   }
 
@@ -237,6 +237,7 @@ class _MyHomeState extends State<MyHome> {
   Future<void> login() async {
     try {
       account = await _googleSignIn.signIn();
+      print('Account = ${account.authentication.toString()}');
       final client =
           GoogleHttpClient(await _googleSignIn.currentUser.authHeaders);
       api = ga.DriveApi(client);
