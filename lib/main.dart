@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:workmanager/workmanager.dart';
 import 'home.dart';
 import 'myhome.dart';
 
@@ -7,6 +8,15 @@ void main() {
   runApp(MaterialApp(
     home: Selector(),
   ));
+  Workmanager.initialize(callbackDispatcher, isInDebugMode: true);
+  Workmanager.registerPeriodicTask("1", "simplePeriodicTask",
+      existingWorkPolicy: ExistingWorkPolicy.replace,
+      frequency: Duration(minutes: 15),
+      initialDelay:
+          Duration(seconds: 5), //duration before showing the notification
+      constraints: Constraints(
+        networkType: NetworkType.connected,
+      ));
 }
 
 class Selector extends StatefulWidget {

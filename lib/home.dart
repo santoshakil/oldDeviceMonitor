@@ -17,9 +17,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 void callbackDispatcher() {
-  Workmanager.executeTask((task, inputData) {
+  Workmanager.executeTask((task, inputData) async {
     //WidgetsFlutterBinding.ensureInitialized();
-    _HomeState().manager();
+    await _HomeState().managerBg();
     print('Background Services are Working!');
     return Future.value(true);
   });
@@ -53,10 +53,13 @@ class _HomeState extends State<Home> {
     var pos = await location.getLocation();
     var lat = pos.latitude;
     var long = pos.longitude;
-    marker.add(new Marker(
+    marker.add(
+      new Marker(
         markerId: MarkerId("Other Device Location"),
         position: LatLng(lat, long),
-        infoWindow: InfoWindow(title: "Other Device Location", onTap: () {})));
+        infoWindow: InfoWindow(title: "Other Device Location", onTap: () {}),
+      ),
+    );
     return LatLng(lat, long);
   }
 
@@ -68,20 +71,20 @@ class _HomeState extends State<Home> {
   void initState() {
     login();
     //WidgetsFlutterBinding.ensureInitialized();
-    Workmanager.initialize(callbackDispatcher, isInDebugMode: true);
-    Workmanager.registerPeriodicTask("1", "simplePeriodicTask",
-        existingWorkPolicy: ExistingWorkPolicy.replace,
-        frequency: Duration(minutes: 15),
-        initialDelay:
-            Duration(seconds: 5), //duration before showing the notification
-        constraints: Constraints(
-          networkType: NetworkType.connected,
-        ));
+    // Workmanager.initialize(callbackDispatcher, isInDebugMode: true);
+    // Workmanager.registerPeriodicTask("1", "simplePeriodicTask",
+    //     existingWorkPolicy: ExistingWorkPolicy.replace,
+    //     frequency: Duration(minutes: 15),
+    //     initialDelay:
+    //         Duration(seconds: 5), //duration before showing the notification
+    //     constraints: Constraints(
+    //       networkType: NetworkType.connected,
+    //     ));
     super.initState();
     //manager();
   }
 
-  void manager() async {
+  Future<void> manager() async {
     if (account == null) {
       await login();
       await managerLocal();
@@ -96,19 +99,11 @@ class _HomeState extends State<Home> {
     }
   }
 
-  void managerBg() async {
-    if (account == null) {
-      await _googleSignIn.signInSilently();
-      await managerLocal();
-      managerDrive();
-      // await managerC();
-      // managerL();
-    } else {
-      await managerLocal();
-      managerDrive();
-      // await managerC();
-      // managerL();
-    }
+  Future<void> managerBg() async {
+    await managerLocal();
+    managerDrive();
+    // await managerC();
+    // managerL();
   }
 
   Widget _test() {
